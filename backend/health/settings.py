@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'health_app',
+    'rest_framework',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -47,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middlware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'health.urls'
@@ -68,7 +73,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'health.wsgi.application'
+CORS_ORIGIN_ALLOW_ALL = False
 
+CORS_ORIGIN_WHITELIST = (
+       'localhost:4200',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
