@@ -1,3 +1,57 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-# Create your models here.
+class Profile(models.Model):
+
+    GENDER =[
+    (Male,'Male'),
+    (Female,'Female'),
+    ]
+    POSITION = [
+        (Doctor,'DOCTOR'),
+        (Nurse,'Nurse'),
+    ]
+    first_name = models.CharField(max_length = 40)
+    last_name = models.CharField(max_length = 40)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    gender = models.CharField(max_length = 30, choices = GENDER, default=)
+    position = models.CharField(max_length = 50, choices = POSITION, default='Nurse')
+    bio = models.TextField(max_length=500, blank=True)
+    pic = models.ImageField(upload_to = 'avatar/', blank=True)
+    work_id = models.CharField(max_length=30, blank=True)
+    hospital_name = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.user
+
+class Original_image(models.Model):
+    image = models.ImageField(upload_to = 'forms/')
+    sickness = models.CharField(max_length = 82)
+    posted_by = models.ForeignKey(Profile, related_name='forms')
+
+    def __str__(self):
+        return self.sickness
+
+class Extracted_data(models.Model):
+
+    name = models.CharField(max_length = 60)
+    age = models.IntegerField()
+    all_comments = models.TextField()
+    posted_by = models.ForeignKey(Profile)
+
+    def __str__(self):
+        return self.name
+
+
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
