@@ -13,6 +13,7 @@ class Profile(models.Model):
         (Doctor,'DOCTOR'),
         (Nurse,'Nurse'),
     ]
+
     first_name = models.CharField(max_length = 40)
     last_name = models.CharField(max_length = 40)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -21,7 +22,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     pic = models.ImageField(upload_to = 'avatar/', blank=True)
     work_id = models.CharField(max_length=30, blank=True)
-    hospital_name = models.DateField(null=True, blank=True)
+    hospital_name = models.CharField(null=True, blank=True)
 
     def __str__(self):
         return self.user
@@ -38,7 +39,7 @@ class Extracted_data(models.Model):
 
     name = models.CharField(max_length = 60)
     age = models.IntegerField()
-    all_comments = models.TextField()
+    contents = models.TextField()
     posted_by = models.ForeignKey(Profile)
 
     def __str__(self):
