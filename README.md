@@ -14,7 +14,7 @@ A web application to scan handwritten forms and extract the required information
 
 * [Klaus Orioki](oriokiklaus@gmail.com)
 
-* [Anthony Maina](a@m)
+* [Anthony Maina](antonynganga05@gmail.com)
 
 ---
 
