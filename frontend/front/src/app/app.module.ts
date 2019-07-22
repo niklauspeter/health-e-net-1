@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,6 +8,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { LandingComponent } from './landing/landing.component';
 import { StatsComponent } from './stats/stats.component';
 import { NavbarComponent } from './navbar/navbar.component';
+
+const routes:Routes = [
+  {path:"landing",component:LandingComponent},
+  {path:"profile", component:ProfileComponent},
+  {path:"stats",component:StatsComponent},
+]
 
 @NgModule({
   declarations: [
@@ -18,7 +25,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]
