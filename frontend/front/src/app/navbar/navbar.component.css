@@ -3,6 +3,13 @@
     background: aliceblue;
     color: black;
 }
+nav{
+    border-bottom-color: crimson;
+    border-bottom: 1.2rem;
+}
 a:hover{
     color: crimson;
+}
+nav .navbar-brand:hover{
+    color: black;
 }
