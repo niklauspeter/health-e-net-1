@@ -29,21 +29,21 @@ class Profile(models.Model):
 
 class Original_image(models.Model):
     image = models.ImageField(upload_to = 'forms/')
-    sickness = models.CharField(max_length = 82)
+    sickness_form = models.CharField(max_length = 82)
     posted_by = models.ForeignKey(Profile, related_name='forms')
 
     def __str__(self):
-        return self.sickness
+        return self.sickness_form
 
 class Extracted_data(models.Model):
 
-    name = models.CharField(max_length = 60)
+    sickness_name = models.CharField(max_length = 60)
     age = models.IntegerField()
     contents = models.TextField()
     posted_by = models.ForeignKey(Profile)
 
     def __str__(self):
-        return self.name
+        return self.sickness_name
 
 
 
