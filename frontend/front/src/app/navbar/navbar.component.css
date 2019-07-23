@@ -1,0 +1,8 @@
+*{
+    font-family: 'Cabin', sans-serif;
+    background: aliceblue;
+    color: black;
+}
+a:hover{
+    color: crimson;
+}
