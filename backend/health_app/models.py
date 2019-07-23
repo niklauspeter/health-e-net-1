@@ -6,44 +6,44 @@ from django.dispatch import receiver
 class Profile(models.Model):
 
     GENDER =[
-    (Male,'Male'),
-    (Female,'Female'),
+        ('Male','Male'),
+        ('Female','Female'),
     ]
     POSITION = [
-        (Doctor,'DOCTOR'),
-        (Nurse,'Nurse'),
+        ('Doctor','DOCTOR'),
+        ('Nurse','Nurse'),
     ]
 
     first_name = models.CharField(max_length = 40)
     last_name = models.CharField(max_length = 40)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    gender = models.CharField(max_length = 30, choices = GENDER, default=)
+    gender = models.CharField(max_length = 30, choices = GENDER, default='Male')
     position = models.CharField(max_length = 50, choices = POSITION, default='Nurse')
     bio = models.TextField(max_length=500, blank=True)
-    pic = models.ImageField(upload_to = 'avatar/', blank=True)
+    pic = models.ImageField(upload_to = 'avatar/', blank=True, default='')
     work_id = models.CharField(max_length=30, blank=True)
-    hospital_name = models.CharField(null=True, blank=True)
+    hospital_name = models.CharField(max_length = 54, null=True, blank=True)
 
     def __str__(self):
         return self.user
 
 class Original_image(models.Model):
     image = models.ImageField(upload_to = 'forms/')
-    sickness = models.CharField(max_length = 82)
+    sickness_form = models.CharField(max_length = 82)
     posted_by = models.ForeignKey(Profile, related_name='forms')
 
     def __str__(self):
-        return self.sickness
+        return self.sickness_form
 
 class Extracted_data(models.Model):
 
-    name = models.CharField(max_length = 60)
+    sickness_name = models.CharField(max_length = 60)
     age = models.IntegerField()
     contents = models.TextField()
     posted_by = models.ForeignKey(Profile)
 
     def __str__(self):
-        return self.name
+        return self.sickness_name
 
 
 
