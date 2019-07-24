@@ -51,7 +51,7 @@ SECRET_KEY = 'x4(ozv=yagz+jw&l-t)zrc17=xr!4s(pc*-nzicxx2*lv58rhh'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# AUTH_USER_MODEL='core.User'
 
 # Application definition
 
