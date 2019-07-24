@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import user
+from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -17,10 +17,10 @@ class Profile(models.Model):
 
     first_name = models.CharField(max_length = 40)
     last_name = models.CharField(max_length = 40)
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     gender = models.CharField(max_length = 30, choices = GENDER, default='Male')
     position = models.CharField(max_length = 50, choices = POSITION, default='Nurse')
-    phone_number = models.IntegerField()
+    phone_number = models.IntegerField(blank=True)
     bio = models.TextField(max_length=500, blank=True)
     pic = models.ImageField(upload_to = 'avatar/', blank=True, default='no profile pic')
     work_id = models.CharField(max_length=30, blank=True)
@@ -48,11 +48,11 @@ class Extracted_data(models.Model):
         return self.sickness_name
 
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
