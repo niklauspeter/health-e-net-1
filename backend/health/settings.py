@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'health_app',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 
 ]
@@ -149,6 +150,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 
 # Static files (CSS, JavaScript, Images)
