@@ -48,4 +48,7 @@ for c in cnts:
 		screenCnt = approx
 		break
 
-        
+# apply the four point transform to obtain a top-down
+# view of the original image
+paper = four_point_transform(image, screenCnt.reshape(4, 2))
+warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
