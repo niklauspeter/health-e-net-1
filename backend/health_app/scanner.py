@@ -52,3 +52,21 @@ for c in cnts:
 # view of the original image
 paper = four_point_transform(image, screenCnt.reshape(4, 2))
 warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
+
+# convert the warped image to grayscale, then threshold it
+# to give it that 'black and white' paper effect
+
+# warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+# T = threshold_local(warped, 11, offset = 10, method = "gaussian")
+# warped = (warped > T).astype("uint8") * 255
+
+warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+warped = cv2.GaussianBlur(warped, (5, 5), 0)
+# thresh = threshold_local(warped, 11, offset = 10, method = "gaussian")
+thresh = cv2.threshold(warped, 0, 255,
+	cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+# warped = (warped > T).astype("uint8") * 255
+ 
+cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,
+	cv2.CHAIN_APPROX_SIMPLE)
+cnts = imutils.grab_contours(cnts)
