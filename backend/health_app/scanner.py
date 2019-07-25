@@ -131,3 +131,28 @@ for (q, i) in enumerate(np.arange(0, len(questionCnts), 2)):
  
 	# draw the outline of the correct answer on the test
 	# cv2.drawContours(paper, [cnts[k]], -1, color, 3)
+
+
+# grab the test taker
+# score = (correct / 5.0) * 100
+# print("[INFO] score: {:.2f}%".format(score))
+# cv2.putText(paper, "{:.2f}%".format(score), (10, 30),
+# 	cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+# cv2.imshow("Original", image)
+
+# cv2.imshow("Exam", paper)
+
+# show the original and scanned images
+print("STEP 3: Apply perspective transform")
+cv2.imshow("Original", imutils.resize(orig, height = 650))
+cv2.imshow("Scanned", imutils.resize(warped, height = 650))
+cv2.imshow("Thresh", imutils.resize(thresh, height = 650))
+
+cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
+
+cv2.imshow("Outline", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# cv2.drawContours(image, [screenCnt], -1, color, 2)
+# cv2.drawContours(image, [warped], -1, (0, 255, 0), 2)
